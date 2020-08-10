@@ -1,0 +1,19 @@
+{
+  "name": "lrucache",
+  "version": "1.0.0",
+  "description": "LRU (Least Recently Used) Cache",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/d-mariano/LRUCache.git"
+  },
+  "author": "Dave Mariano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/d-mariano/LRUCache/issues"
+  },
+  "homepage": "https://github.com/d-mariano/LRUCache#readme"
+}
