@@ -2,9 +2,10 @@
   "name": "lrucache",
   "version": "1.0.0",
   "description": "LRU (Least Recently Used) Cache",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node .",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/d-mariano/LRUCache/issues"
   },
-  "homepage": "https://github.com/d-mariano/LRUCache#readme"
+  "homepage": "https://github.com/d-mariano/LRUCache#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.1.1"
+  },
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
 }
