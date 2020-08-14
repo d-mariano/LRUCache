@@ -4,11 +4,11 @@ cache for quick access. Whenever a value is accessed or pushed onto the stack, i
 
 ## Requirements
 
-LRUCache requries [Node.js](https://nodejs.org/en/) to run. You must first [download and install Node.js](https://nodejs.org/en/download/).
+Using the interactive console with LRUCache requries [Node.js](https://nodejs.org/en/). You must first [download and install Node.js](https://nodejs.org/en/download/). All dependencies are managed through [npm](https://www.npmjs.com/get-npm) which is distrubted with [Node.js](https://nodejs.org/en/).
 
 ## Dependencies
 
-LRUCache itself does not require any dependencies; however, the interactive console uses [readline-sync](https://www.npmjs.com/package/readline-sync)
+LRUCache alone does not require any dependencies; however, the interactive console uses [readline-sync](https://www.npmjs.com/package/readline-sync)
 for handling user input with synchronous-style programming.
 
 ```bash
