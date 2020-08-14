@@ -169,10 +169,7 @@ class LRUCache {
   }
 
   /**
-   * Returns an array of objects representing the cash order and key/values
-   * 
-   * This is to be used for testing only and debugging, the cache itself
-   * shouldn't need to be stored in an array.
+   * Returns an array of objects representing the cash order and key/values, useful or debugging
    */
   getCache() {
     let node = this.cacheFront;

@@ -16,11 +16,12 @@ let select;
 console.log("Welcome!\n\nThe LRU Cache has been initialized with a value of 5. Please feel free to change it with the `init` command.");
 while (select !== EXIT) {
   console.log("\nCommands:\n")
-  console.log("get\tGet a value from the cache based on a given key");
-  console.log("put\tPut a given value in the cache with a given key");
-  console.log("del\tDelete a given key from the cache");
-  console.log("reset\tReset the cache");
-  console.log("init\tInitialize a new cache with a given size");
+  console.log(GET + "\tGet a value from the cache based on a given key");
+  console.log(PUT + "\tPut a given value in the cache with a given key");
+  console.log(DEL + "\tDelete a given key from the cache");
+  console.log(RESET + "\tReset the cache");
+  console.log(INIT + "\tInitialize a new cache with a given size");
+  console.log(EXIT + "\tExit");
 
   printCache();
   printReturn();
