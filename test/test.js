@@ -95,7 +95,7 @@ describe('LRUCache', function() {
     ];
 
     tests.forEach(function(test) {
-      it('Put key ' + test.key + ' w/ value ' + test.value + "\n\t    Cache Size: " + test.cacheSize + '/' + lruCacheSize + "\n\t    Cache Value: " + JSON.stringify(test.cacheValue), function() {
+      it('Put key ' + test.key + ' w/ value ' + test.value + "\n\t    Expected Cache Size: " + test.cacheSize + '/' + lruCacheSize + "\n\t    Expected Cache Value: " + JSON.stringify(test.cacheValue), function() {
         lruCache.put(test.key, test.value);
         expect(lruCache.numNodes).to.equal(test.cacheSize);
         expect(lruCache.getCache()).to.deep.equal(test.cacheValue);
@@ -176,7 +176,7 @@ describe('LRUCache', function() {
     ];
 
     tests.forEach(function (test) {
-      it('Get key ' + test.key + "\n\t    Return Value: " + test.returnValue + "\n\t    Cache Value: " + JSON.stringify(test.cacheValue), function () {
+      it('Get key ' + test.key + "\n\t    Expected Return Value: " + test.returnValue + "\n\t    Expected Cache Value: " + JSON.stringify(test.cacheValue), function () {
         expect(lruCache.get(test.key)).to.equal(test.returnValue);
         expect(lruCache.getCache()).to.deep.equal(test.cacheValue);
       });
@@ -226,7 +226,7 @@ describe('LRUCache', function() {
     ];
 
     tests.forEach(function (test) {
-      it('Delete key ' + test.key + "\n\t    Cache Size: " + test.cacheSize + '/' + lruCacheSize + "\n\t    Cache Value: " + JSON.stringify(test.cacheValue), function () {
+      it('Delete key ' + test.key + "\n\t    Expected Cache Size: " + test.cacheSize + '/' + lruCacheSize + "\n\t    Expected Cache Value: " + JSON.stringify(test.cacheValue), function () {
         lruCache.del(test.key)
         expect(lruCache.numNodes).to.equal(test.cacheSize);
         expect(lruCache.getCache()).to.deep.equal(test.cacheValue);
@@ -271,7 +271,7 @@ describe('LRUCache', function() {
     ];
 
     tests.forEach(function (test) {
-      it('Put key ' + test.key + ' w/ value ' + test.value + "\n\t    Cache Size: " + test.cacheSize + '/' + lruCacheSize + "\n\t    Cache Value: " + JSON.stringify(test.cacheValue), function () {
+      it('Put key ' + test.key + ' w/ value ' + test.value + "\n\t    Expected Cache Size: " + test.cacheSize + '/' + lruCacheSize + "\n\t    Expected Cache Value: " + JSON.stringify(test.cacheValue), function () {
         lruCache.put(test.key, test.value);
         expect(lruCache.numNodes).to.equal(test.cacheSize);
         expect(lruCache.getCache()).to.deep.equal(test.cacheValue);
@@ -319,7 +319,7 @@ describe('LRUCache', function() {
     ];
 
     tests.forEach(function (test) {
-      it('Put key ' + test.key + ' w/ value ' + test.value + "\n\t    Cache Size: " + test.cacheSize + '/' + lruCacheSize + "\n\t    Cache Value: " + JSON.stringify(test.cacheValue), function () {
+      it('Put key ' + test.key + ' w/ value ' + test.value + "\n\t    Expected Cache Size: " + test.cacheSize + '/' + lruCacheSize + "\n\t    Expected Cache Value: " + JSON.stringify(test.cacheValue), function () {
         lruCache.put(test.key, test.value);
         expect(lruCache.numNodes).to.equal(test.cacheSize);
         expect(lruCache.getCache()).to.deep.equal(test.cacheValue);
@@ -359,7 +359,7 @@ describe('LRUCache', function() {
     ];
 
     tests.forEach(function (test) {
-      it('Get key ' + test.key + "\n\t    Return Value: " + test.returnValue + "\n\t    Cache Value: " + JSON.stringify(test.cacheValue), function () {
+      it('Get key ' + test.key + "\n\t    Expected Return Value: " + test.returnValue + "\n\t    Expected Cache Value: " + JSON.stringify(test.cacheValue), function () {
         expect(lruCache.get(test.key)).to.equal(test.returnValue);
         expect(lruCache.getCache()).to.deep.equal(test.cacheValue);
       });
@@ -407,11 +407,61 @@ describe('LRUCache', function() {
     ];
 
     tests.forEach(function (test) {
-      it('Delete key ' + test.key + "\n\t    Cache Size: " + test.cacheSize + '/' + lruCacheSize + "\n\t    Cache Value: " + JSON.stringify(test.cacheValue), function () {
+      it('Delete key ' + test.key + "\n\t    Expected Cache Size: " + test.cacheSize + '/' + lruCacheSize + "\n\t    Expected Cache Value: " + JSON.stringify(test.cacheValue), function () {
         lruCache.del(test.key)
         expect(lruCache.numNodes).to.equal(test.cacheSize);
         expect(lruCache.getCache()).to.deep.equal(test.cacheValue);
       });
     });
   });
+
+  describe('init', function () {
+    it('Init cache to 3', function () {
+      lruCache= new LRUCache(3);
+      expect(lruCache.numNodes).to.equal(0);
+      expect(lruCache.cacheSize).to.equal(3);
+      expect(lruCache.getCache()).to.deep.equal([]);
+    });
+
+
+    it('Init cache to apple should throw error', function () {
+      expect(() => { lruCache = new LRUCache('apple') }).to.throw(Error);
+    });
+
+    it('Init cache to 1', function () {
+      lruCache = new LRUCache(1);
+      expect(lruCache.numNodes).to.equal(0);
+      expect(lruCache.cacheSize).to.equal(1);
+      expect(lruCache.getCache()).to.deep.equal([]);
+    });
+
+    it('Put key apple w/ value orange should add to cache', function () {
+      lruCache.put('apple', 'orange');
+      expect(lruCache.numNodes).to.equal(1);
+      expect(lruCache.getCache(), [{ key: 'apple', value: 'orange' }]);
+    });
+
+    it('Get value of apple should return orange', function () {
+      expect(lruCache.get('apple'), 'orange');
+      expect(lruCache.getCache(), [{ key: 'apple', value: 'orange' }]);
+    });
+
+    it('Put key grape w/ value juice should add to cache and bump out apple', function () {
+      lruCache.put('grape', 'juice');
+      expect(lruCache.numNodes).to.equal(1);
+      expect(lruCache.getCache(), [{ key: 'grape', value: 'juice' }]);
+    });
+
+    it('Get value of apple after putting grape should return null', function () {
+      expect(lruCache.get('apple'), null);
+      expect(lruCache.getCache(), [{ key: 'grape', value: 'juice' }]);
+    });
+
+    it('Get value of grape should return juice', function () {
+      expect(lruCache.get('grape'), 'juice');
+      expect(lruCache.getCache(), [{ key: 'grape', value: 'juice' }]);
+    });
+
+  });
+
 });

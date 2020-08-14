@@ -2,15 +2,17 @@
  * LRUCache - An LRU (Least Recently Used) cache implementation
  */
 class LRUCache {
+  cache = {};
   cacheBack = null;
   cacheFront = null;
   cacheSize = 0;
   numNodes = 0;
 
   constructor(cacheSize) {
-    if (isNaN(cacheSize)) {
-      throw cacheSize + ' is not a number!';
+    if (isNaN(cacheSize) || cacheSize <= 0) {
+      throw new Error('Cache size must be a number greater than 0');
     }
+
     this.cacheSize = cacheSize;
   }
 
@@ -42,19 +44,7 @@ class LRUCache {
    * @returns {*} Node associated with key, if key exists in cache, else null
    */
   getNode(key) {
-    let node = this.cacheFront;
-    if (!node) {
-      return null;
-    }
-
-    while (node) {
-      if (node.key != key) {
-        node = node.next;
-        continue;
-      }
-      return node;
-    }
-    return null;
+    return this.cache[key] ? this.cache[key] : null;
   }
 
   /**
@@ -71,26 +61,33 @@ class LRUCache {
   * @returns {*} Node associated with key, if key exists in cache, else null
   */
   put(key, value) {
+    if (!key || this.cacheSize <= 0) {
+      return;
+    }
+
     let node = this.getNode(key);
     if (node) {
       node.value = value;
+      this.cache[key] = node;
       this.setCacheFront(node);
       return;
     }
 
     if (this.numNodes == this.cacheSize) {
+      delete this.cache[this.cacheBack.key];
       this.cacheBack = this.cacheBack.prev;
-      this.cacheBack.next = null;
     } else {
       this.numNodes++;
     }
 
-    node = new Node(key, value);
-    this.setCacheFront(node);
+    this.cache[key] = new Node(key, value);
+    this.setCacheFront(this.cache[key]);
 
     if (!this.cacheBack) {
       this.cacheBack = this.cacheFront;
     }
+
+    this.cacheBack.next = null;
   }
 
   /**
@@ -159,6 +156,7 @@ class LRUCache {
     }
 
     this.numNodes--;
+    delete this.cache[key];
   }
 
   /**
@@ -167,6 +165,7 @@ class LRUCache {
   reset() {
     this.cacheBack = this.cacheFront = null;
     this.numNodes = 0;
+    this.cache = {};
   }
 
   /**
