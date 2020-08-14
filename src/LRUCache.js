@@ -169,7 +169,7 @@ class LRUCache {
   }
 
   /**
-   * Returns an array of objects representing the cash order and key/values, useful or debugging
+   * Returns an array of objects representing the cache order and key/values, useful or debugging
    */
   getCache() {
     let node = this.cacheFront;
