@@ -61,7 +61,7 @@ class LRUCache {
   * @returns {*} Node associated with key, if key exists in cache, else null
   */
   put(key, value) {
-    if (!key || this.cacheSize <= 0) {
+    if (!key) {
       return;
     }
 
