@@ -25,7 +25,7 @@ $ npm start
 
 ## Testing
 
-Testing is done w/ [Mocha](https://mochajs.org/) & [Chai](https://www.chaijs.com/). Simply install the development dependencies as well before
+Unit tests are implemented with [Mocha](https://mochajs.org/) & [Chai](https://www.chaijs.com/). Simply install the development dependencies as well before
 running the test script.
 
 ```bash
