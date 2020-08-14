@@ -1,6 +1,6 @@
 ## LRU Cache
 An LRU cache is a cache the deletes the least-recently used value first. This strategy keeps the most-used items in the 
-cache for quick access. Whenever an value is accessed or pushed onto the stack, it is promoted to the top.
+cache for quick access. Whenever a value is accessed or pushed onto the stack, it is promoted to the top.
 
 ## Requirements
 
